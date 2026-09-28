@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1660" height="760" viewBox="0 0 1660 760" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .edge { fill: none; stroke: #475569; stroke-width: 2; marker-end: url(#arrow); }
+      .edge-label { font-size: 13px; fill: #334155; }
+      .code { font-family: Menlo, Consolas, monospace; }
+      .kind { font-size: 11px; font-weight: bold; letter-spacing: 1px; }
+      .name { font-size: 15px; font-weight: bold; fill: #0f172a; }
+      .note { font-size: 12px; fill: #475569; }
+      .lane-title { font-size: 13px; font-weight: bold; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="1660" height="760" fill="#ffffff"/>
+
+  <!-- AWS cloud boundary -->
+  <rect x="195" y="40" width="1440" height="690" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="215" y="66" font-size="14" font-weight="bold" fill="#475569">AWS Cloud · us-east-1</text>
+
+  <!-- Lanes -->
+  <rect x="770" y="130" width="540" height="140" rx="10" fill="#eff6ff"/>
+  <text x="786" y="152" class="lane-title">1 · Register a student</text>
+  <rect x="770" y="370" width="540" height="250" rx="10" fill="#f0fdf4"/>
+  <text x="786" y="392" class="lane-title">2 · Mark attendance</text>
+
+  <!-- Admin (outside AWS) -->
+  <rect x="25" y="345" width="150" height="70" rx="10" fill="#ffffff" stroke="#334155" stroke-width="2"/>
+  <text x="100" y="376" text-anchor="middle" class="name">Admin</text>
+  <text x="100" y="396" text-anchor="middle" class="note">web browser</text>
+
+  <!-- Cognito -->
+  <rect x="220" y="150" width="200" height="80" rx="10" fill="#fef2f2" stroke="#dd344c" stroke-width="2"/>
+  <text x="320" y="176" text-anchor="middle" class="kind" fill="#dd344c">AMAZON COGNITO</text>
+  <text x="320" y="198" text-anchor="middle" class="name">User &amp; Identity Pool</text>
+  <text x="320" y="217" text-anchor="middle" class="note">admin sign-up / sign-in</text>
+
+  <!-- React app -->
+  <rect x="220" y="340" width="200" height="80" rx="10" fill="#fdf4ff" stroke="#a21caf" stroke-width="2"/>
+  <text x="320" y="366" text-anchor="middle" class="kind" fill="#a21caf">AWS AMPLIFY HOSTING</text>
+  <text x="320" y="388" text-anchor="middle" class="name">React frontend</text>
+  <text x="320" y="407" text-anchor="middle" class="note">Amplify UI Authenticator</text>
+
+  <!-- API Gateway -->
+  <rect x="470" y="150" width="150" height="490" rx="10" fill="#faf5ff" stroke="#8c4fff" stroke-width="2"/>
+  <text x="545" y="380" text-anchor="middle" class="kind" fill="#8c4fff">AMAZON</text>
+  <text x="545" y="396" text-anchor="middle" class="kind" fill="#8c4fff">API GATEWAY</text>
+  <text x="545" y="420" text-anchor="middle" class="name">ams_apis_tf</text>
+  <text x="545" y="440" text-anchor="middle" class="note">REST · stage dev</text>
+
+  <!-- S3: registration bucket -->
+  <rect x="800" y="170" width="200" height="75" rx="10" fill="#f0fdf4" stroke="#3f8624" stroke-width="2"/>
+  <text x="900" y="195" text-anchor="middle" class="kind" fill="#3f8624">AMAZON S3</text>
+  <text x="900" y="218" text-anchor="middle" class="name code" font-size="13">new-student-</text>
+  <text x="900" y="235" text-anchor="middle" class="name code" font-size="13">registration-tf</text>
+
+  <!-- S3: class images bucket -->
+  <rect x="800" y="400" width="200" height="70" rx="10" fill="#ffffff" stroke="#3f8624" stroke-width="2"/>
+  <text x="900" y="425" text-anchor="middle" class="kind" fill="#3f8624">AMAZON S3</text>
+  <text x="900" y="451" text-anchor="middle" class="name code" font-size="13">class-images-tf</text>
+
+  <!-- Lambda: register_student -->
+  <rect x="1090" y="170" width="200" height="75" rx="10" fill="#fff7ed" stroke="#ed7100" stroke-width="2"/>
+  <text x="1190" y="195" text-anchor="middle" class="kind" fill="#ed7100">AWS LAMBDA</text>
+  <text x="1190" y="218" text-anchor="middle" class="name code" font-size="13">register_student</text>
+  <text x="1190" y="236" text-anchor="middle" class="note">student_registration_tf</text>
+
+  <!-- Lambda: mark_attendance -->
+  <rect x="1090" y="520" width="200" height="80" rx="10" fill="#fff7ed" stroke="#ed7100" stroke-width="2"/>
+  <text x="1190" y="546" text-anchor="middle" class="kind" fill="#ed7100">AWS LAMBDA</text>
+  <text x="1190" y="569" text-anchor="middle" class="name code" font-size="13">mark_attendance</text>
+  <text x="1190" y="588" text-anchor="middle" class="note">student_authentication_tf</text>
+
+  <!-- SES -->
+  <rect x="1380" y="75" width="200" height="75" rx="10" fill="#fef2f2" stroke="#dd344c" stroke-width="2"/>
+  <text x="1480" y="100" text-anchor="middle" class="kind" fill="#dd344c">AMAZON SES</text>
+  <text x="1480" y="122" text-anchor="middle" class="name">Email notification</text>
+  <text x="1480" y="140" text-anchor="middle" class="note">sent to the instructor</text>
+
+  <!-- DynamoDB: class_student_tf -->
+  <rect x="1380" y="190" width="200" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1480" y="215" text-anchor="middle" class="kind" fill="#2563eb">AMAZON DYNAMODB</text>
+  <text x="1480" y="238" text-anchor="middle" class="name code" font-size="13">class_student_tf</text>
+  <text x="1480" y="257" text-anchor="middle" class="note">registered students</text>
+
+  <!-- Rekognition -->
+  <rect x="1380" y="330" width="200" height="90" rx="10" fill="#ecfeff" stroke="#0e7490" stroke-width="2"/>
+  <text x="1480" y="356" text-anchor="middle" class="kind" fill="#0e7490">AMAZON REKOGNITION</text>
+  <text x="1480" y="379" text-anchor="middle" class="name">Face collection</text>
+  <text x="1480" y="399" text-anchor="middle" class="note code">studentsImage_tf</text>
+
+  <!-- DynamoDB: attendance_records_tf -->
+  <rect x="1380" y="620" width="200" height="80" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="1480" y="645" text-anchor="middle" class="kind" fill="#2563eb">AMAZON DYNAMODB</text>
+  <text x="1480" y="668" text-anchor="middle" class="name code" font-size="13">attendance_records_tf</text>
+  <text x="1480" y="687" text-anchor="middle" class="note">one record per date</text>
+
+  <!-- Edges: client side -->
+  <path class="edge" d="M175 380 H218"/>
+  <path class="edge" d="M320 340 V232"/>
+  <text x="330" y="290" class="edge-label">sign in</text>
+  <path class="edge" d="M420 380 H468"/>
+  <text x="444" y="370" text-anchor="middle" class="edge-label">REST</text>
+
+  <!-- Edges: registration lane -->
+  <path class="edge" d="M620 207 H798"/>
+  <text x="709" y="197" text-anchor="middle" class="edge-label code" font-size="11">PUT /{bucket}/{file}</text>
+  <path class="edge" d="M1000 207 H1088"/>
+  <text x="1044" y="197" text-anchor="middle" class="edge-label" font-size="12">ObjectCreated</text>
+  <path class="edge" d="M1290 182 H1310 V112 H1378"/>
+  <text x="1302" y="152" text-anchor="end" class="edge-label" font-size="12">send email</text>
+  <path class="edge" d="M1290 214 H1378"/>
+  <text x="1334" y="207" text-anchor="middle" class="edge-label" font-size="12">PutItem</text>
+  <path class="edge" d="M1290 234 H1330 V360 H1378"/>
+  <text x="1322" y="305" text-anchor="end" class="edge-label" font-size="12">IndexFaces</text>
+
+  <!-- Edges: attendance lane -->
+  <path class="edge" d="M620 435 H798"/>
+  <text x="625" y="425" class="edge-label code" style="font-size:10.5px">PUT /class/{bucket}/{file}</text>
+  <path class="edge" d="M620 575 H1088"/>
+  <text x="709" y="565" text-anchor="middle" class="edge-label code" font-size="12">GET /studentidentify</text>
+  <path class="edge" d="M1000 435 H1150 V518"/>
+  <text x="1070" y="427" text-anchor="middle" class="edge-label" font-size="12">GetObject</text>
+  <path class="edge" d="M1290 540 H1440 V422"/>
+  <text x="1448" y="475" class="edge-label" font-size="12">DetectFaces +</text>
+  <text x="1448" y="491" class="edge-label" font-size="12">SearchFacesByImage</text>
+  <path class="edge" d="M1290 565 H1612 V230 H1582"/>
+  <text x="1440" y="558" text-anchor="middle" class="edge-label" font-size="12">Query / Scan</text>
+  <path class="edge" d="M1190 600 V660 H1378"/>
+  <text x="1290" y="652" text-anchor="middle" class="edge-label" font-size="12">PutItem</text>
+</svg>

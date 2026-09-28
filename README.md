@@ -22,25 +22,9 @@ Take attendance for a whole class by uploading **one group photo**. The app find
 
 ## Architecture
 
-```
-                         ┌──────────────────────┐
-  Admin (browser) ──────▶│  React app (Amplify) │◀── Cognito (auth)
-                         └──────────┬───────────┘
-                                    │ REST
-                         ┌──────────▼───────────┐
-                         │     API Gateway      │
-                         └──┬────────┬───────┬──┘
-     PUT /new-student-…/{f} │        │       │ GET /studentidentify
-                            ▼        │       ▼
-               S3: new-student-      │   Lambda: mark_attendance
-               registration-tf       │     ├─ Rekognition DetectFaces
-                     │ ObjectCreated │     ├─ Rekognition SearchFacesByImage
-                     ▼               │     └─ DynamoDB: attendance_records_tf
-     Lambda: register_student        │
-       ├─ Rekognition IndexFaces     │ PUT /class/class-images-tf/{f}
-       ├─ DynamoDB: class_student_tf ▼
-       └─ SES email          S3: class-images-tf
-```
+<p align="center">
+  <img src="docs/architecture.png" alt="Architecture diagram: the React app on Amplify signs in with Cognito and calls API Gateway, which uploads photos to S3 and invokes the Lambdas that use Rekognition, DynamoDB and SES" width="100%" />
+</p>
 
 ### How it works
 
@@ -74,6 +58,7 @@ Take attendance for a whole class by uploading **one group photo**. The app find
 
 ```
 .
+├── docs/                     # Architecture diagram (SVG source + PNG)
 ├── frontend/                 # React app (Create React App)
 │   └── src/
 │       ├── App.js            # Main UI: registration + attendance
@@ -170,10 +155,3 @@ terraform destroy
 ```
 
 If the S3 buckets still contain images, empty them first, or `destroy` may fail.
-
-## Known limitations
-
-- The student email domain is hard-coded as `@iu.edu` in the registration Lambda.
-- The classroom name (`SWE-315/316`) is hard-coded in the attendance Lambda.
-- The Lambdas target the `python3.8` runtime, which AWS has deprecated. Update `runtime` in `terraform/lambdaFunction.tf` to a supported version such as `python3.12`.
-- Each class photo is saved as a single attendance record per date. Uploading again for the same date overwrites that record.
