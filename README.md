@@ -4,8 +4,6 @@
 
 Take attendance for a whole class by uploading **one group photo**. The app finds every face in the photo, matches each one against the registered students with **Amazon Rekognition**, and records who was present and who was absent for that date. There are no servers to manage: the whole stack runs on AWS managed services and is created with **Terraform**.
 
----
-
 ## Features
 
 - **Secure admin login.** Sign-up and sign-in use Amazon Cognito and the Amplify `Authenticator`.
